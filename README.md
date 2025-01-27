@@ -1,11 +1,11 @@
 // password-strength-checker
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
+
 
 int checkPasswordStrength(char *password) {
     int length = strlen(password);
-    int hasUpper = 0, hasLower = 0, hasDigit = 0, hasSpecial = 0;
+    int Upper = 0,Lower = 0,Digit = 0,Special = 0;
     
     
     if (length < 8) {
@@ -15,18 +15,18 @@ int checkPasswordStrength(char *password) {
    
     for (int i = 0; i < length; i++) {
         if (isupper(password[i])) {
-            hasUpper = 1;
+            Upper = 1;
         } else if (islower(password[i])) {
-            hasLower = 1;
+            Lower = 1;
         } else if (isdigit(password[i])) {
-            hasDigit = 1;
+            Digit = 1;
         } else if (ispunct(password[i])) {
-            hasSpecial = 1;
+            Special = 1;
         }
     }
     
     
-    if (hasUpper && hasLower && hasDigit && hasSpecial) {
+    if (Upper && Lower && Digit && Special) {
         return 1;  
     }
     
