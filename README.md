@@ -1,45 +1,42 @@
-// password-strength-checker
 #include <stdio.h>
 #include <string.h>
-
+#include <ctype.h>
 
 int checkPasswordStrength(char *password) {
     int length = strlen(password);
-    int Upper = 0,Lower = 0,Digit = 0,Special = 0;
-    
-    
+    int hasUpper = 0, hasLower = 0, hasDigit = 0, hasSpecial = 0;
+
     if (length < 8) {
         return 0; 
     }
-    
-   
+
     for (int i = 0; i < length; i++) {
         if (isupper(password[i])) {
-            Upper = 1;
+            hasUpper = 1;
         } else if (islower(password[i])) {
-            Lower = 1;
+            hasLower = 1;
         } else if (isdigit(password[i])) {
-            Digit = 1;
+            hasDigit = 1;
         } else if (ispunct(password[i])) {
-            Special = 1;
+            hasSpecial = 1;
         }
     }
-    
-    
-    if (Upper && Lower && Digit && Special) {
+
+    if (hasUpper && hasLower && hasDigit && hasSpecial) {
         return 1;  
     }
-    
+
     return 0;  
 }
 
 int main() {
     char password[100];
-    
+
     printf("Enter your password: ");
-    scanf("%s", password);
-    
-   
+    fgets(password, sizeof(password), stdin);  
+
+    password[strcspn(password, "\n")] = 0;
+
     if (checkPasswordStrength(password)) {
         printf("Password is strong!\n");
     } else {
@@ -49,6 +46,6 @@ int main() {
         printf("- At least one digit\n");
         printf("- At least one special character\n");
     }
-    
+
     return 0;
-} 
+}
